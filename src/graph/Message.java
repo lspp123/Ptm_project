@@ -8,18 +8,23 @@ public class Message {
     public final double asDouble;
     public final Date date;
 
-    public Message(Object input_message) {
-        this.data = input_message.toString().getBytes();
-        this.asText = input_message.toString();
-        this.asDouble = parseDoubleOrNaN(input_message.toString());
+    public Message(Object inputMessage) {
+        if (inputMessage instanceof byte[])
+            this.data = (byte[]) inputMessage;
+        else
+            this.data = inputMessage.toString().getBytes();
+
+        this.asText = new String(this.data);
+        this.asDouble = parseDoubleOrNaN(this.asText);
         this.date = Date.from(java.time.Instant.now());
     }
 
-    private double parseDoubleOrNaN(String input) {
+    private static double parseDoubleOrNaN(String input) {
         try {
-            return Double.parseDouble(input);
+            return Double.parseDouble(input.trim());
         } catch (NumberFormatException e) {
             return Double.NaN;
         }
     }
+
 }

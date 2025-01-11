@@ -11,10 +11,10 @@ public class TopicManagerSingleton {
         Map<String, Topic> topics;
 
         private TopicManager() {
-            topics = new ConcurrentHashMap<String, Topic>();
+            topics = new ConcurrentHashMap<>();
         }
 
-        public Topic getTopics(String topicName) {
+        public Topic getTopic(String topicName) {
             if (!topics.containsKey(topicName))
                 topics.put(topicName, new Topic(topicName));
             return topics.get(topicName);

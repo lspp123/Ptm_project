@@ -1,7 +1,6 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Topic {
     public final String name;
@@ -10,6 +9,8 @@ public class Topic {
 
     Topic(String name){
         this.name=name;
+        subs = new ArrayList<>();
+        pubs = new ArrayList<>();
     }
 
     public void subscribe(Agent a){
@@ -21,7 +22,7 @@ public class Topic {
     }
 
     public void publish(Message m){
-        pubs.forEach(a -> a.callback(this.name, m));
+        subs.forEach(a -> a.callback(this.name, m));
     }
 
     public void addPublisher(Agent a){

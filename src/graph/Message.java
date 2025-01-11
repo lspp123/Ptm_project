@@ -8,10 +8,10 @@ public class Message {
     public final double asDouble;
     public final Date date;
 
-    public Message(String message_text) {
-        this.data = message_text.getBytes().clone();
-        this.asText = message_text;
-        this.asDouble = parseDoubleOrNaN(message_text);
+    public Message(Object input_message) {
+        this.data = input_message.toString().getBytes();
+        this.asText = input_message.toString();
+        this.asDouble = parseDoubleOrNaN(input_message.toString());
         this.date = Date.from(java.time.Instant.now());
     }
 
